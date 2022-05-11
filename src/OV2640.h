@@ -25,7 +25,7 @@ public:
 
     void setFrameSize(framesize_t size);
     void setPixelFormat(pixformat_t format);
-
+    camera_fb_t* getCameraFb() { return fb; }
 private:
     void runIfNeeded(); // grab a frame if we don't already have one
 
