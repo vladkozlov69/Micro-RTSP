@@ -14,6 +14,7 @@ public:
     ~OV2640(){
     };
     esp_err_t init(camera_config_t config);
+    esp_err_t deinit();
     void done(void);
     void run(void);
     size_t getSize(void);
@@ -24,6 +25,7 @@ public:
     pixformat_t getPixelFormat(void);
 
     void setFrameSize(framesize_t size);
+    void updateFrameSize(framesize_t size);
     void setPixelFormat(pixformat_t format);
     camera_fb_t* getCameraFb() { return fb; }
 private:

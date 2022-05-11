@@ -361,6 +361,13 @@ RTSP_CMD_TYPES CRtspSession::Handle_RtspRequest( char *aRequest, unsigned aReque
 {
     if ( ParseRtspRequest( aRequest, aRequestSize ) )
     {
+        m_streaming = false;
+        Serial.print("Handle_RtspRequest:");
+        Serial.println(m_RtspCmdType);
+        Serial.print("Stream:");
+        Serial.println(m_CommandStreamPart);
+        m_Streamer->setURIStream(m_CommandStreamPart);
+
         switch ( m_RtspCmdType )
         {
             case RTSP_OPTIONS:  Handle_RtspOPTION();   break;

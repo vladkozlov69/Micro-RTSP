@@ -21,6 +21,7 @@ public:
     String getURIHost(){ return m_URIHost; }; // for getting things back by sessions
     String getURIPresentation(){ return m_URIPresentation; };
     String getURIStream(){ return m_URIStream; };
+    virtual void setURIStream(const char * uriStream) = 0;
 
 protected:
 
@@ -29,7 +30,9 @@ protected:
     String  m_URIHost; // Host:port URI part that client should use to connect. also it is reported in session answers where appropriate.
     String  m_URIPresentation; // name of presentation part of URI. sessions will check if client used correct one
     String  m_URIStream; // stream part of the URI.
-
+    u_short m_width; // image data info
+    u_short m_height;
+    
 private:
     int    SendRtpPacket(unsigned const char *jpeg, int jpegLen, int fragmentOffset, BufPtr quant0tbl = NULL, BufPtr quant1tbl = NULL);// returns new fragmentOffset or 0 if finished with frame
 
@@ -47,9 +50,6 @@ private:
     bool m_TCPTransport;
     SOCKET m_Client;
     uint32_t m_prevMsec;
-
-    u_short m_width; // image data info
-    u_short m_height;
         
     char * RtpBuf;
 };

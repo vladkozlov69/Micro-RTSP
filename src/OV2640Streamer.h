@@ -12,4 +12,5 @@ public:
     OV2640Streamer(SOCKET aClient, OV2640 &cam);
 
     virtual void streamImage(uint32_t curMsec) override;
+    virtual void setURIStream(const char * uriStream) override;
 };

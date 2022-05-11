@@ -190,6 +190,17 @@ void OV2640::setFrameSize(framesize_t size)
     _cam_config.frame_size = size;
 }
 
+void OV2640::updateFrameSize(framesize_t size)
+{
+    if (getFrameSize() != size)
+    {
+        setFrameSize(size);
+        sensor_t * s = esp_camera_sensor_get();
+        s->set_vflip(s, 1);
+        s->set_framesize(s, size);
+    }
+}
+
 pixformat_t OV2640::getPixelFormat(void)
 {
     return _cam_config.pixel_format;
@@ -225,4 +236,17 @@ esp_err_t OV2640::init(camera_config_t config)
     // ESP_ERROR_CHECK(gpio_install_isr_service(0));
 
     return ESP_OK;
+}
+
+esp_err_t OV2640::deinit()
+{
+    esp_err_t err = esp_camera_deinit();
+    if (err != ESP_OK)
+    {
+        DEBUG_PRINT("!!Camera deinit failed with error 0x%x", err);
+        return err;
+    }
+    fb = NULL;
+
+    return ESP_OK;  
 }
