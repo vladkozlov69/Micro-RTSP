@@ -198,6 +198,7 @@ void OV2640::updateFrameSize(framesize_t size)
         sensor_t * s = esp_camera_sensor_get();
         s->set_vflip(s, 1);
         s->set_framesize(s, size);
+        done();
     }
 }
 
